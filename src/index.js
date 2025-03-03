@@ -100,11 +100,11 @@ async function main() {
             resource: fileMetadata,
             media: fileData,
             uploadType: 'multipart',
-            fields: 'id',
+            fields: 'webContentLink',
             supportsAllDrives: true,
         });
 
-        actions.setOutput("link", file.response.webContentLink);
+        actions.setOutput("link", file.data.webContentLink);
 
         return file;
     } else {
@@ -112,9 +112,10 @@ async function main() {
         const file = await drive.files.update({
             fileId,
             media: fileData,
+            fields: 'webContentLink',
         });
 
-        actions.setOutput("link", file.response.webContentLink);
+        actions.setOutput("link", file.data.webContentLink);
 
         return file;
     }
