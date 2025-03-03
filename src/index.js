@@ -96,19 +96,27 @@ async function main() {
             parents: [uploadFolderId],
         };
 
-        return drive.files.create({
+        const file = await drive.files.create({
             resource: fileMetadata,
             media: fileData,
             uploadType: 'multipart',
             fields: 'id',
             supportsAllDrives: true,
         });
+
+        actions.setOutput("link", file.response.webContentLink);
+
+        return file;
     } else {
         actions.info(`File ${filename} already exists. Updating it.`);
-        return drive.files.update({
+        const file = await drive.files.update({
             fileId,
             media: fileData,
         });
+
+        actions.setOutput("link", file.response.webContentLink);
+
+        return file;
     }
 }
 
