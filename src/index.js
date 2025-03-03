@@ -103,7 +103,6 @@ async function main() {
             fields: 'id',
             supportsAllDrives: true,
         });
-        actions.info(`Got response ${JSON.stringify(file)}`);
 
         actions.setOutput("id", file.data.id);
 
@@ -115,7 +114,6 @@ async function main() {
             media: fileData,
             fields: 'id',
         });
-        actions.info(`Got response ${JSON.stringify(file)}`);
 
         actions.setOutput("id", file.data.id);
 
