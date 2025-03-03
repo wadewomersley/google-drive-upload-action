@@ -96,19 +96,16 @@ async function main() {
             parents: [uploadFolderId],
         };
 
-        const file = await drive.files.create({
+        var file = await drive.files.create({
             resource: fileMetadata,
             media: fileData,
             uploadType: 'multipart',
-            fields: 'webContentLink',
+            fields: 'id',
             supportsAllDrives: true,
         });
-        
-        actions.info(`Uploaded`);
         actions.info(`Got response ${JSON.stringify(file)}`);
-        actions.info(`Got response ${JSON.stringify(file.data)}`);
 
-        actions.setOutput("link", file.data.webContentLink);
+        actions.setOutput("id", file.data.id);
 
         return file;
     } else {
@@ -116,13 +113,11 @@ async function main() {
         const file = await drive.files.update({
             fileId,
             media: fileData,
-            fields: 'webContentLink',
+            fields: 'id',
         });
-        actions.info(`Uploaded`);
         actions.info(`Got response ${JSON.stringify(file)}`);
-        actions.info(`Got response ${JSON.stringify(file.data)}`);
 
-        actions.setOutput("link", file.data.webContentLink);
+        actions.setOutput("id", file.data.id);
 
         return file;
     }
