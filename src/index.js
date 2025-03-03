@@ -104,6 +104,8 @@ async function main() {
             supportsAllDrives: true,
         });
 
+        actions.info(`Got response ${JSON.stringify(file)}`);
+
         actions.setOutput("link", file.data.webContentLink);
 
         return file;
@@ -114,6 +116,8 @@ async function main() {
             media: fileData,
             fields: 'webContentLink',
         });
+
+        actions.info(`Got response ${JSON.stringify(file)}`);
 
         actions.setOutput("link", file.data.webContentLink);
 
