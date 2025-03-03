@@ -103,8 +103,10 @@ async function main() {
             fields: 'webContentLink',
             supportsAllDrives: true,
         });
-
+        
+        actions.info(`Uploaded`);
         actions.info(`Got response ${JSON.stringify(file)}`);
+        actions.info(`Got response ${JSON.stringify(file.data)}`);
 
         actions.setOutput("link", file.data.webContentLink);
 
@@ -116,8 +118,9 @@ async function main() {
             media: fileData,
             fields: 'webContentLink',
         });
-
+        actions.info(`Uploaded`);
         actions.info(`Got response ${JSON.stringify(file)}`);
+        actions.info(`Got response ${JSON.stringify(file.data)}`);
 
         actions.setOutput("link", file.data.webContentLink);
 
