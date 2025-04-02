@@ -10,6 +10,7 @@ const target = actions.getInput('target', { required: true });
 const owner = actions.getInput('owner', { required: false });
 const childFolder = actions.getInput('child_folder', { required: false });
 const overwrite = actions.getInput('overwrite', { required: false }) === 'true';
+const makePublic = actions.getInput('public', { required: false }) === 'true';
 let filename = actions.getInput('name', { required: false });
 
 const credentialsJSON = JSON.parse(Buffer.from(credentials, 'base64').toString());
@@ -106,6 +107,14 @@ async function main() {
 
         actions.setOutput("id", file.data.id);
 
+        if (makePublic) {
+            await drive.permissions.create({
+                fileId: file.data.id,
+                resource: {"role": "reader", "type": "anyone"},
+                supportsAllDrives: true,
+            });
+        }
+
         return file;
     } else {
         actions.info(`File ${filename} already exists. Updating it.`);
@@ -116,6 +125,14 @@ async function main() {
         });
 
         actions.setOutput("id", file.data.id);
+
+        if (makePublic) {
+            await drive.permissions.create({
+                fileId: file.data.id,
+                resource: {"role": "reader", "type": "anyone"},
+                supportsAllDrives: true,
+            });
+        }
 
         return file;
     }
