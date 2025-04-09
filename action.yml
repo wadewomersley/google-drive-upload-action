@@ -26,6 +26,10 @@ inputs:
     description: 'Whether to overwrite an existing file with the same name.'
     required: false
     default: false
+  public:
+    description: 'Whether to set the permissions as public or not.'
+    required: false
+    default: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
